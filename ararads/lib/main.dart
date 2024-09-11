@@ -62,11 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: false,
           iconTheme: IconTheme.of(context),
-          //leadingWidth: 300,
+          leadingWidth: 200,
           leading: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 5.0),
             child: 
-              Image.asset('assets/leadingAraraIcon.png'),
+              Image.asset('assets/leadingAraraIcon.png', color: Colors.white),
             ),
           title: Text(
             'Painel de Controle',
@@ -121,23 +121,29 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>(); 
+    TextTheme theme = Theme.of(context).textTheme;
     return Container(
       child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                  const Card(
+                  Card(
                     child: SizedBox(
-                      width: 300,
-                      height: 200,
+                      width: 150,
+                      height: 50,
                       child: Center(
                         child: Row(
-
+                          children: [
+                            SizedBox(width: 10,),
+                            Text("Conexão", style: theme.bodyLarge),
+                            SizedBox(width: 30,),
+                            Icon(Icons.signal_cellular_connected_no_internet_0_bar_outlined)
+                          ],
                         ),
                       )
                     ),
                   ),
-        
+                  SizedBox(height: 50,), 
                   ElevatedButton.icon(
                     onPressed: () {
                     },
