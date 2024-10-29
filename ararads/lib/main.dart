@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ararads/websocketsConnection.dart' as websockets;
+import 'package:ararads/websockets_connection.dart' as websockets;
 
 void main() {
   runApp(const MyApp());
@@ -31,12 +32,14 @@ class MyAppState extends ChangeNotifier {
 
   Future<void> connect() async {
     if (!araraConnectedViaWiFi) {
-      bool success = await websockets.connectWifi();
+      final success = await websockets.connectWifi();
       if (success) {
-      araraConnectedViaWiFi = true;
+        araraConnectedViaWiFi = true;
       } else {
-      araraConnectedViaWiFi = false;
+        araraConnectedViaWiFi = false;
       }
+    } else {
+      debugPrint("Já conectado");
     }
     notifyListeners();
   }
@@ -147,9 +150,9 @@ class HomePage extends StatelessWidget {
                       child: Center(
                         child: Row(
                           children: [
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Text("Conexão", style: theme.bodyLarge),
-                            SizedBox(width: 30,),
+                            const SizedBox(width: 30,),
                             Icon(appState.araraConnectedViaWiFi ? Icons.signal_cellular_4_bar_outlined : 
                             Icons.signal_cellular_connected_no_internet_0_bar_outlined)
                           ],
