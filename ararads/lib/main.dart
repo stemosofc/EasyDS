@@ -1,7 +1,10 @@
+
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ararads/websockets_connection.dart' as websockets;
+import 'package:ararads/arara_connection.dart' as araraConnection;
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +12,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -28,19 +30,56 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+  final websocketConnection = araraConnection.websocketConnection();
+  final icmpPing = araraConnection.ICMPPingManager("192.168.4.1");
   bool araraConnectedViaWiFi = false;
+  bool isEnabled = false;
+  bool isReachable = false;
+  bool wantedToDisconnect = false;
+  Timer? _pingTimer;
 
-  Future<void> connect() async {
+  MyAppState() {
+    // Inicia o monitoramento de conexão ao criar o MyAppState
+    _startPingMonitoring();
+  }
+
+  void _startPingMonitoring() {
+    _pingTimer = Timer.periodic(Duration(seconds: 2), (timer) async {
+    isReachable = await icmpPing.checkPing();
+    if(isReachable && !wantedToDisconnect){
+      websocketConnection.connectWifi();
+    }
+    araraConnectedViaWiFi = isReachable;
+    notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _pingTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> useConnectButton() async {
+    if(!isReachable){
     if (!araraConnectedViaWiFi) {
-      final success = await websockets.connectWifi();
+      final success = await websocketConnection.connectWifi();
       if (success) {
         araraConnectedViaWiFi = true;
       } else {
         araraConnectedViaWiFi = false;
       }
     } else {
-      debugPrint("Já conectado");
+      wantedToDisconnect = true;
+      websocketConnection.disconnectWifi();
+      araraConnectedViaWiFi = false;
     }
+    }
+    notifyListeners();
+  }
+
+  void toggleEnabled() {
+    isEnabled = !isEnabled; // Alterna entre habilitar e desabilitar
     notifyListeners();
   }
 }
@@ -143,6 +182,24 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+            // Exibe o botão apenas se conectado
+            AnimatedOpacity(
+              opacity: appState.araraConnectedViaWiFi ? 1.0 : 0,
+              duration: const Duration(milliseconds: 500),
+              child: appState.araraConnectedViaWiFi ? ElevatedButton(
+                onPressed: () {
+                  appState.toggleEnabled();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: appState.isEnabled ? Colors.red : Colors.green,
+                ),
+                child: Text(
+                  style: theme.labelLarge,
+                  appState.isEnabled ? 'Desabilitar' : 'Habilitar',
+                ),
+              ) : const SizedBox.shrink(),
+            ),
+          const SizedBox(height: 20),
                   Card(
                     child: SizedBox(
                       width: 150,
@@ -160,12 +217,12 @@ class HomePage extends StatelessWidget {
                       )
                     ),
                   ),
-                  SizedBox(height: 50,), 
+                  const SizedBox(height: 50,), 
                   ElevatedButton.icon(
                     onPressed: () async {
-                      await appState.connect();
+                      await appState.useConnectButton();
                     },
-                    label: const Text('Conectar'),
+                    label: appState.araraConnectedViaWiFi ?  const Text('Disconectar') : const Text('Conectar'),
                   ),
             ],
               ),
