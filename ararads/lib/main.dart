@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   final websocketConnection = araraConnection.websocketConnection();
-  final icmpPing = araraConnection.ICMPPingManager("192.168.4.1");
+  final icmpPing = araraConnection.ICMPPingManager('192.168.4.1');
   bool araraConnectedViaWiFi = false;
   bool isEnabled = false;
   bool isReachable = false;
@@ -44,8 +44,9 @@ class MyAppState extends ChangeNotifier {
   }
 
   void _startPingMonitoring() {
-    _pingTimer = Timer.periodic(Duration(seconds: 2), (timer) async {
+    _pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
     isReachable = await icmpPing.checkPing();
+    debugPrint(isReachable.toString());
     if(isReachable && !wantedToDisconnect){
       websocketConnection.connectWifi();
     }

@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:convert';
 import 'package:dart_ping/dart_ping.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -107,27 +108,37 @@ Future<bool> endOfConnection() async {
 class ICMPPingManager {
   final String ipAddress;
   ICMPPingManager(this.ipAddress);
+  final parser = PingParser(
+    responseRgx: RegExp(r'de (?<i p>.*): bytes=(?:\d+) tempo=(?<time>\d+)ms TTL=(?<ttl>\d+)'),
+    summaryRgx: RegExp(r'Enviados = (?<tx>\d+), Recebidos = (?<rx>\d+), Perdidos = (?:\d+)'),
+    timeoutRgx: RegExp(r'host unreachable'),
+    timeToLiveRgx: RegExp(r''),
+    unknownHostStr: RegExp(r'A solicitação ping não pôde encontrar o host'),
+  );
+
 
   Future<bool> checkPing() async {
-  final ping = Ping(ipAddress, count: 1, timeout: 1); // Um ping único com timeout de 1 segundo
+  final ping = Ping(ipAddress, count: 1, forceCodepage: true, timeout: 1, encoding: const Utf8Codec(allowMalformed: true), parser: parser);
   Completer<bool> completer = Completer<bool>();
 
   ping.stream.listen(
     (event) {
       if (!completer.isCompleted) {
         if (event.response != null) {
-          completer.complete(true); // Ping bem-sucedido
+          completer.complete(true);
         } else {
-          completer.complete(false); // Ping falhou
+          completer.complete(false);
         }
       }
     },
     onError: (error) {
+      debugPrint("ERRO");
       if (!completer.isCompleted) {
         completer.complete(false); // Completa com falso em caso de erro
       }
     },
     onDone: () {
+      debugPrint("SEM RESPOSTA");
       if (!completer.isCompleted) {
         completer.complete(false); // Completa com falso se o stream terminar sem resposta
       }
@@ -136,17 +147,21 @@ class ICMPPingManager {
 
   // Define um tempo limite para o ping, retornando falso se o tempo limite for excedido
   return completer.future.timeout(
-    Duration(seconds: 2),
+    const Duration(seconds: 2),
     onTimeout: () => false,
   );
 }
 
 
   Future<Duration?> ping() async {
+    debugPrint("7777");
+
     final ping = Ping(ipAddress, count: 1, timeout: 1); // Um ping com timeout de 1 segundo
     Completer<Duration?> completer = Completer<Duration?>();
+    debugPrint("999");
     ping.stream.listen(
       (event) {
+        debugPrint("AAAA");
         if (event.response != null) {
           final responseTime = event.response!.time!.inMilliseconds;
           completer.complete(Duration(milliseconds: responseTime));
@@ -155,11 +170,13 @@ class ICMPPingManager {
         }
       },
       onError: (error) {
+                debugPrint("BBBBB");
         if (!completer.isCompleted) {
           completer.completeError('Erro ao tentar ping: $error');
         }
       },
       onDone: () {
+        debugPrint("CCCCC");
         if (!completer.isCompleted) {
           completer.complete(null); // Caso o ping não tenha retornado uma resposta
         }
