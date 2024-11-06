@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true, 
+    "editor.tabSize": 2, 
+    "editor.insertSpaces": true, 
+    "editor.autoIndent": "full",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.formatOnSave": true,
+    },
+    "[json]": {
+        "editor.formatOnSave": true
+    },
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "dart.lineLength": 80 // Define o comprimento máximo das linhas em 80 caracteres
+    }
+}
