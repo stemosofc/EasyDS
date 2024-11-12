@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/stemos/Documents/Arara/AraraDS/ararads/windows/flutter"
+    "cmake.sourceDirectory": "C:/Users/stemos/Documents/Arara/AraraDS/ararads/windows/flutter",
+    "cmake.ignoreCMakeListsMissing": true
 }

@@ -39,7 +39,6 @@ class MyAppState extends ChangeNotifier {
   Timer? _pingTimer;
 
   MyAppState() {
-    // Inicia o monitoramento de conexão ao criar o MyAppState
     _startPingMonitoring();
   }
 
@@ -49,8 +48,10 @@ class MyAppState extends ChangeNotifier {
     debugPrint(isReachable.toString());
     if(isReachable && !wantedToDisconnect){
       websocketConnection.connectWifi();
+      araraConnectedViaWiFi = isReachable;
+    }else{
+      //terminar, ping nao funcionando quando disconecta de proposito
     }
-    araraConnectedViaWiFi = isReachable;
     notifyListeners();
     });
   }
@@ -61,24 +62,43 @@ class MyAppState extends ChangeNotifier {
     super.dispose();
   }
 
-  Future<void> useConnectButton() async {
-    if(!isReachable){
-    if (!araraConnectedViaWiFi) {
-      final success = await websocketConnection.connectWifi();
-      if (success) {
-        araraConnectedViaWiFi = true;
-      } else {
-        araraConnectedViaWiFi = false;
-      }
+  Future<void> useConnectButton(BuildContext context) async {
+    if ((!araraConnectedViaWiFi && !wantedToDisconnect) || !isReachable) {
+      showDisconnectedMessage(context);
     } else {
-      wantedToDisconnect = true;
-      websocketConnection.disconnectWifi();
-      araraConnectedViaWiFi = false;
-    }
+      if(araraConnectedViaWiFi){
+        wantedToDisconnect = true;
+        websocketConnection.disconnectWifi();
+        araraConnectedViaWiFi = false;
+      }else{
+        final success = await websocketConnection.connectWifi();
+        araraConnectedViaWiFi = success;
+        wantedToDisconnect = false;
+      }
     }
     notifyListeners();
   }
 
+  void showDisconnectedMessage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Erro de Conexão'),
+          content: const Text('A placa não está conectada ao Wi-Fi.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  
   void toggleEnabled() {
     isEnabled = !isEnabled; // Alterna entre habilitar e desabilitar
     notifyListeners();
@@ -221,7 +241,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 50,), 
                   ElevatedButton.icon(
                     onPressed: () async {
-                      await appState.useConnectButton();
+                      await appState.useConnectButton(context);
                     },
                     label: appState.araraConnectedViaWiFi ?  const Text('Disconectar') : const Text('Conectar'),
                   ),
