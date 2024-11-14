@@ -49,8 +49,8 @@ class MyAppState extends ChangeNotifier {
     if(isReachable && !wantedToDisconnect){
       websocketConnection.connectWifi();
       araraConnectedViaWiFi = isReachable;
-    }else{
-      //terminar, ping nao funcionando quando disconecta de proposito
+    }else if(!wantedToDisconnect){
+      araraConnectedViaWiFi = isReachable;
     }
     notifyListeners();
     });
