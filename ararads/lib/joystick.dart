@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:js_interop';
-
 import 'package:flutter/foundation.dart';
 import 'package:xinput_gamepad/xinput_gamepad.dart';
 class Joystick {

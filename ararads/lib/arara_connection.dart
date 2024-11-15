@@ -79,7 +79,7 @@ class ICMPPingManager {
 
   Future<bool> checkPing() async {
   final ping = await PingWin32.ping(
-    InternetAddress.tryParse(this.ipAddress)!,
+    InternetAddress.tryParse(ipAddress)!,
     timeout: Duration(seconds: 2),
   );
   Completer<bool> completer = Completer<bool>();
