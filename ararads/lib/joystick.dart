@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:js_interop';
+
 import 'package:flutter/foundation.dart';
 import 'package:xinput_gamepad/xinput_gamepad.dart';
 class Joystick {
@@ -5,6 +8,19 @@ class Joystick {
   List<Map<String, dynamic>> jsonArray = List.empty(growable: true);
   final maxValueJoystick = 32767;
   final maxValueTrigger = 255;
+  Map<String, dynamic> emptyControllerJson = {
+        "INDEX": 0,
+        "LY": 0,
+        "LX": 0,
+        "RX": 0,
+        "RY": 0,
+        "B": false,
+        "X": false,
+        "Y": false,
+        "A": false,
+        "RT": 0,
+        "LT": 0
+      };
 
   void initialize() {
     XInputManager.enableXInput();
@@ -106,6 +122,13 @@ class Joystick {
         json[jsonField] = value;
       }
     }
+  }
+
+  String getJson(){
+    for (var json in jsonArray){
+      return jsonEncode(json);  
+    }
+    return jsonEncode(emptyControllerJson);
   }
 
   void printjsons(){
