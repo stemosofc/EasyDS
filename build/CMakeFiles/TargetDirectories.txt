@@ -1,0 +1,10 @@
+C:/Users/stemos/Documents/Arara/AraraDS/build/CMakeFiles/INSTALL.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/flutter/CMakeFiles/flutter_assemble.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/flutter/CMakeFiles/INSTALL.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/runner/CMakeFiles/ararads.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/runner/CMakeFiles/INSTALL.dir
+C:/Users/stemos/Documents/Arara/AraraDS/build/runner/CMakeFiles/ALL_BUILD.dir
