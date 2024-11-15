@@ -68,44 +68,6 @@ Future<bool> checkConnection() async {
   }
   return completer.future;
 }
-
-Future<bool> endOfConnection() async {
-  final Completer<bool> completer = Completer<bool>();
-  if (kDebugMode) {
-        debugPrint('Indo escutar');
-      }
-  ws?.stream.listen(
-    (message) {
-      if (kDebugMode) {
-        debugPrint('Mensagem recebida do WebSocket: $message');
-      }
-      if (message.contains('Desconectado') && !completer.isCompleted) {
-        completer.complete(true);
-      }
-    },
-    onError: (error) {
-      if (kDebugMode) {
-        debugPrint('Erro de WebSocket: $error');
-      }
-      if (!completer.isCompleted) {
-        completer.complete(true);
-      }
-    },
-    onDone: () {
-      if (kDebugMode) {
-        debugPrint('Mensagem recebida');
-      }
-      if (!completer.isCompleted) {
-        completer.complete(true);
-      }
-    },
-  );
-  await Future.delayed(const Duration(seconds: 2));
-  if (!completer.isCompleted) {
-    completer.complete(false);
-  }
-  return completer.future;
-  }
 }
 
 class ICMPPingManager {
@@ -122,7 +84,6 @@ class ICMPPingManager {
   );
   Completer<bool> completer = Completer<bool>();
   if(ping != null){
-    debugPrint(ping.statusString);
     if(ping.statusString == "IP_SUCCESS"){
       completer.complete(true);
     }

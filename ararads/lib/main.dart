@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ararads/arara_connection.dart' as araraConnection;
+import 'package:ararads/joystick.dart' as joystick;
 
 void main() {
   runApp(const MyApp());
@@ -32,20 +33,24 @@ class MyApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {
   final websocketConnection = araraConnection.websocketConnection();
   final icmpPing = araraConnection.ICMPPingManager('192.168.4.1');
+  final controllers = joystick.Joystick();
   bool araraConnectedViaWiFi = false;
   bool isEnabled = false;
   bool isReachable = false;
   bool wantedToDisconnect = false;
-  Timer? _pingTimer;
+  Timer? pingTimer;
+  Timer? controllerTimer;
+
 
   MyAppState() {
+    controllers.initialize();
     _startPingMonitoring();
+    sendControllerValues();
   }
 
   void _startPingMonitoring() {
-    _pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
+    pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
     isReachable = await icmpPing.checkPing();
-    debugPrint(isReachable.toString());
     if(isReachable && !wantedToDisconnect){
       websocketConnection.connectWifi();
       araraConnectedViaWiFi = isReachable;
@@ -56,9 +61,16 @@ class MyAppState extends ChangeNotifier {
     });
   }
 
+  void sendControllerValues() {
+    controllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
+    controllers.printjsons();
+    notifyListeners();
+    });
+  }
+
   @override
   void dispose() {
-    _pingTimer?.cancel();
+    pingTimer?.cancel();
     super.dispose();
   }
 
