@@ -6,6 +6,7 @@ class Joystick {
   List<Map<String, dynamic>> jsonArray = List.empty(growable: true);
   final maxValueJoystick = 32767;
   final maxValueTrigger = 255;
+  var controllersConnected = 0;
   Map<String, dynamic> emptyControllerJson = {
         "INDEX": 0,
         "LY": 0,
@@ -22,7 +23,7 @@ class Joystick {
 
   void initialize() {
     XInputManager.enableXInput();
-    XInputManager.inputLag = 5;
+    debugPrint("aaaaaaaaaaaaaa");
     for (int controllerIndex in ControllersManager.getIndexConnectedControllers()) {
       final Controller controller = Controller(index: controllerIndex, buttonMode: ButtonMode.PRESS, 
       leftThumbDeadzone: 0, rightThumbDeadzone: 0, triggersDeadzone: 0);
@@ -88,6 +89,10 @@ class Joystick {
       availableControllers.add(controller);
     }
 
+    if(ControllersManager.getIndexConnectedControllers().isEmpty){
+      availableControllers = List.empty(growable: true);
+    }
+
     print("Available controllers:");
     for (Controller controller in availableControllers) {
       print("Controller ${controller.index}");
@@ -121,6 +126,20 @@ class Joystick {
       }
     }
   }
+
+  bool controllerConnected(){
+    if(controllersConnected == ControllersManager.getIndexConnectedControllers().length){
+      controllersConnected = ControllersManager.getIndexConnectedControllers().length;
+      return false;
+    }else{
+      controllersConnected = ControllersManager.getIndexConnectedControllers().length;
+      return true;
+    }
+  }
+
+  List<Controller> getControllersConnected(){
+    return availableControllers;
+  }  
 
   String getJson(){
     for (var json in jsonArray){

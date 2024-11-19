@@ -1,10 +1,7 @@
 
 import 'dart:async';
-import 'dart:convert';
-//import 'package:dart_ping/dart_ping.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
 import 'dart:io';
 import 'package:ping_win32/ping_win32.dart';
 
@@ -14,9 +11,13 @@ class websocketConnection{
 
 WebSocketChannel? ws;
 
+websocketConnection(){
+}
+
 Future<bool> connectWifi() async {
   try{
   ws = WebSocketChannel.connect(Uri.parse('ws://192.168.4.1/ws'));
+  debugPrint("CONECTANDO NESSA PORRA AI CARALHO");
   return await checkConnection().timeout(
       const Duration(seconds: 3),
       onTimeout: () {
@@ -26,6 +27,13 @@ Future<bool> connectWifi() async {
   }catch (e) {
     return false;
   }
+}
+
+String? checkCloseReason() {
+  if(ws != null){
+    return ws?.closeReason;
+  }
+  return "not connected";
 }
 
 Future<void> disconnectWifi() async {

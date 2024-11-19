@@ -38,19 +38,21 @@ class MyAppState extends ChangeNotifier {
   bool isReachable = false;
   bool wantedToDisconnect = false;
   Timer? pingTimer;
-  Timer? controllerTimer;
+  Timer? checkControllerTimer;
+  Timer? sendControllerTimer;
 
 
   MyAppState() {
-    controllers.initialize();
     _startPingMonitoring();
+    checkControllers();
     sendControllerValues();
   }
 
   void _startPingMonitoring() {
     pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
     isReachable = await icmpPing.checkPing();
-    if(isReachable && !wantedToDisconnect){
+    debugPrint(websocketConnection.checkCloseReason());
+    if(isReachable && !wantedToDisconnect && !araraConnectedViaWiFi){
       websocketConnection.connectWifi();
       araraConnectedViaWiFi = isReachable;
     }else if(!wantedToDisconnect){
@@ -60,9 +62,21 @@ class MyAppState extends ChangeNotifier {
     });
   }
 
+    void checkControllers() {
+    checkControllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
+    if(controllers.controllerConnected()){
+      controllers.initialize();
+    }
+    notifyListeners();
+    });
+  }
+
   void sendControllerValues() {
-    controllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
-    controllers.printjsons();
+    sendControllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
+    debugPrint(controllers.controllerConnected().toString());
+    if(araraConnectedViaWiFi && isEnabled ){
+      websocketConnection.sendValues(controllers.getJson());
+    }
     notifyListeners();
     });
   }
@@ -256,6 +270,24 @@ class HomePage extends StatelessWidget {
                     },
                     label: appState.araraConnectedViaWiFi ?  const Text('Disconectar') : const Text('Conectar'),
                   ),
+            Expanded(
+              child: appState.controllers.availableControllers.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: appState.controllers.availableControllers.length,
+                      itemBuilder: (context, index) {
+                        final controller = appState.controllers.availableControllers[index];
+                        return ListTile(
+                          leading: Icon(Icons.gamepad),
+                          title: Text('Controle ${controller.index}'),
+                          subtitle: Text('Status: Conectado'),
+                        );
+                      },
+                    )
+                  : const Text(
+                      'Nenhum controle conectado',
+                      style: TextStyle(fontSize: 16),
+                    ),
+            ),
             ],
               ),
           ),
