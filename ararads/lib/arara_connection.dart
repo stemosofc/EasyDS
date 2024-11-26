@@ -11,13 +11,11 @@ class websocketConnection{
 
 WebSocketChannel? ws;
 
-websocketConnection(){
-}
+websocketConnection();
 
 Future<bool> connectWifi() async {
   try{
   ws = WebSocketChannel.connect(Uri.parse('ws://192.168.4.1/ws'));
-  debugPrint("CONECTANDO NESSA PORRA AI CARALHO");
   return await checkConnection().timeout(
       const Duration(seconds: 3),
       onTimeout: () {
