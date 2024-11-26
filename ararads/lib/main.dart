@@ -51,7 +51,6 @@ class MyAppState extends ChangeNotifier {
   void _startPingMonitoring() {
     pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
     isReachable = await icmpPing.checkPing();
-    debugPrint(websocketConnection.checkCloseReason());
     if(isReachable && !wantedToDisconnect && !araraConnectedViaWiFi){
       websocketConnection.connectWifi();
       araraConnectedViaWiFi = isReachable;
@@ -63,8 +62,8 @@ class MyAppState extends ChangeNotifier {
   }
 
     void checkControllers() {
-    checkControllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
-    if(controllers.controllerConnected()){
+    checkControllerTimer = Timer.periodic(const Duration(milliseconds: 200), (timer) async {
+    if(controllers.controllerConnectedOrDisconnected()){
       controllers.initialize();
     }
     notifyListeners();
@@ -73,9 +72,10 @@ class MyAppState extends ChangeNotifier {
 
   void sendControllerValues() {
     sendControllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
-    debugPrint(controllers.controllerConnected().toString());
-    if(araraConnectedViaWiFi && isEnabled ){
+    if(araraConnectedViaWiFi && isEnabled){
       websocketConnection.sendValues(controllers.getJson());
+    }else{
+      isEnabled = false;
     }
     notifyListeners();
     });
@@ -228,7 +228,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            // Exibe o botão apenas se conectado
             AnimatedOpacity(
               opacity: appState.araraConnectedViaWiFi ? 1.0 : 0,
               duration: const Duration(milliseconds: 500),
@@ -270,29 +269,52 @@ class HomePage extends StatelessWidget {
                     },
                     label: appState.araraConnectedViaWiFi ?  const Text('Disconectar') : const Text('Conectar'),
                   ),
-            Expanded(
-              child: appState.controllers.availableControllers.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: appState.controllers.availableControllers.length,
-                      itemBuilder: (context, index) {
-                        final controller = appState.controllers.availableControllers[index];
-                        return ListTile(
-                          leading: Icon(Icons.gamepad),
-                          title: Text('Controle ${controller.index}'),
-                          subtitle: Text('Status: Conectado'),
-                        );
-                      },
-                    )
-                  : const Text(
-                      'Nenhum controle conectado',
-                      style: TextStyle(fontSize: 16),
-                    ),
-            ),
-            ],
+            const SizedBox(height: 50),
+          if (appState.controllers.availableControllers.isNotEmpty)
+            Center(
+              child: SizedBox(
+                width: 200, // Defina a largura desejada para a lista
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: appState.controllers.availableControllers.length,
+                  itemBuilder: (context, index) {
+                    final controller =
+                        appState.controllers.availableControllers[index];
+                    final isButtonPressed = appState.controllers.jsonArray[index]
+                        .entries
+                        .any((entry) => entry.value == true);
+                    return ListTile(
+                      leading: Icon(Icons.gamepad,
+                          color: isButtonPressed ? Colors.green : Colors.grey),
+                      title: Text('Controle ${controller.index}'),
+                      subtitle: Text('Status: Conectado'),
+                      tileColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16.0),
+                    );
+                  },
+                ),
               ),
-          ),
+            )
+          else
+            Card(
+              child: SizedBox(
+                height: 50,
+                width: 250,
+                child: Center(
+                  child: Text(
+                    'Nenhum controle conectado',
+                    style: theme.labelLarge
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-
