@@ -21,7 +21,8 @@ class Joystick {
         "Y": false,
         "A": false,
         "RT": 0,
-        "LT": 0
+        "LT": 0,
+        "EN": false,
       };
 
   void initialize() {
@@ -47,7 +48,8 @@ class Joystick {
           "Y": false,
           "A": false,
           "RT": 0,
-          "LT": 0
+          "LT": 0,
+          "EN": false,
        });
         controller.buttonsMapping = {
           ControllerButton.A_BUTTON: () => {
@@ -157,6 +159,13 @@ class Joystick {
   List<Controller> getControllersConnected(){
     return availableControllers;
   }  
+
+  void setControllerState(bool enabled){
+    for(var controller in availableControllers){
+      updateControllerData(controller.index, "EN", enabled);
+      //debugPrint("enviand enable:" + " " + enabled.toString());
+    }
+  }
 
   String getJson(){
     for (var json in jsonArray){

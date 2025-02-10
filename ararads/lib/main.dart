@@ -37,9 +37,12 @@ class MyAppState extends ChangeNotifier {
   bool isEnabled = false;
   bool isReachable = false;
   bool wantedToDisconnect = false;
+  bool disableSetted = false;
   Timer? pingTimer;
   Timer? checkControllerTimer;
   Timer? sendControllerTimer;
+  int elseTickCount = 0;
+
 
 
   MyAppState() {
@@ -71,11 +74,28 @@ class MyAppState extends ChangeNotifier {
   }
 
   void sendControllerValues() {
-    sendControllerTimer = Timer.periodic(const Duration(milliseconds: 50), (timer) async {
-    if(araraConnectedViaWiFi && isEnabled){
-      websocketConnection.sendValues(controllers.getJson());
-    }else{
-      isEnabled = false;
+    sendControllerTimer = Timer.periodic(const Duration(milliseconds: 25), (timer) async {
+    try {
+      if (araraConnectedViaWiFi && isEnabled) {
+        controllers.setControllerState(isEnabled);
+        await websocketConnection.sendValues(controllers.getJson());
+        disableSetted = false;
+        elseTickCount = 0;
+      } else {
+        if (!disableSetted && araraConnectedViaWiFi) {
+          controllers.setControllerState(false);
+          await websocketConnection.sendValues(controllers.getJson());
+          elseTickCount++;
+        }
+        if (elseTickCount >= 5) {
+          disableSetted = true;
+        }
+      }
+    } catch (e) {
+      print('Error sending values: $e');
+      wantedToDisconnect = true;
+      websocketConnection.disconnectWifi();
+      araraConnectedViaWiFi = false;
     }
     notifyListeners();
     });
@@ -280,9 +300,9 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final controller =
                         appState.controllers.availableControllers[index];
-                    final isButtonPressed = appState.controllers.jsonArray[index]
-                        .entries
-                        .any((entry) => entry.value == true);
+                    final isButtonPressed = appState.controllers.jsonArray[index].entries
+                    .where((entry) => entry.key != 'EN')
+                    .any((entry) => entry.value == true);
                     return ListTile(
                       leading: Icon(Icons.gamepad,
                           color: isButtonPressed ? Colors.green : Colors.grey),
