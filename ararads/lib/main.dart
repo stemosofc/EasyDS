@@ -11,6 +11,19 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static const ColorScheme myColorScheme = ColorScheme(
+    primary: Color.fromARGB(255,27,25,25), // Main purple
+    secondary: const Color(0xFF5D00D6), // Deep purple
+    surface: Colors.black, // Light gray
+    error: const Color(0xFFFD6A63), // Soft red from branding
+    onPrimary: Colors.white, // Text on primary color
+    onSecondary: Colors.white, // Text on secondary color
+    onSurface: Colors.black, // Text on surface
+    onError: Colors.white, // Text on error color
+    brightness: Brightness.dark,
+    tertiary: Color.fromARGB(255, 249, 249, 249) // Dark mode theme
+  );
+
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
@@ -20,8 +33,18 @@ class MyApp extends StatelessWidget {
         title: 'Arara DS',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(100,43, 76, 120)),
-          textTheme: const TextTheme()
+          colorScheme: myColorScheme,
+          textTheme: const TextTheme(
+            displayLarge: TextStyle(fontFamily: 'Poppins', fontSize: 32, fontWeight: FontWeight.bold),
+            displayMedium: TextStyle(fontFamily: 'Poppins', fontSize: 28, fontWeight: FontWeight.bold),
+            displaySmall: TextStyle(fontFamily: 'Poppins', fontSize: 24, fontWeight: FontWeight.w500),
+            bodyLarge: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+            bodyMedium: TextStyle(fontFamily: 'Poppins', fontSize: 16),
+            bodySmall: TextStyle(fontFamily: 'Poppins', fontSize: 14),
+            labelLarge: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.bold),
+            labelMedium: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold),
+            labelSmall: TextStyle(fontFamily: 'Poppins', fontSize: 12, fontWeight: FontWeight.bold),
+          ),
         ),
         home: const MyHomePage(),
       ),
@@ -184,9 +207,9 @@ class _MyHomePageState extends State<MyHomePage> {
           iconTheme: IconTheme.of(context),
           leadingWidth: 200,
           leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 5.0),
             child: 
-              Image.asset('assets/leadingAraraIcon.png', color: Colors.white),
+              Image.asset("assets/Easy Steam/Logo/Logo principal/2.png"),
             ),
           title: Text(
             'Painel de Controle',
@@ -197,6 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               SafeArea(
                 child: NavigationRail(
+                  backgroundColor: Theme.of(context).colorScheme.tertiary,
                   minExtendedWidth: 200,
                   extended: false,
                   destinations: const [

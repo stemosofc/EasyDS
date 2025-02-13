@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/codes/esptool.exe
     - assets/leadingAraraIcon.png
+    - assets/Easy Steam/Logo/Logo principal/2.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
