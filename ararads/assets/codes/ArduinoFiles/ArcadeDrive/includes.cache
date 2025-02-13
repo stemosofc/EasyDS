@@ -1,0 +1,232 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\cores\\esp32"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\variants\\esp32da"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "stemOSboard.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "WiFi.h",
+    "Includepath": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "WebSocketServer.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "ArduinoJson.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ArduinoJson\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "Adafruit_ICM20X.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_ICM20X"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "Adafruit_BusIO_Register.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_BusIO"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "Wire.h",
+    "Includepath": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\Wire\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "SPI.h",
+    "Includepath": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\SPI\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "Adafruit_Sensor.h",
+    "Includepath": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_Unified_Sensor"
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Temp\\arduino\\sketches\\1DE55F1BAB9C862569A93856C2B022EC\\sketch\\ArcadeDrive.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Analog.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Digital.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Encoder.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Gamepad.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\IMU.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Motor.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\PID.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\RGBLED.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\RotaryEncoder.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\stemOSBoard\\stemWiFi.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFi.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiAP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiGeneric.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiMulti.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiSTA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiScan.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\WiFi\\src\\WiFiUdp.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master\\Base64.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master\\MD5.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master\\WebSocketClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master\\WebSocketServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\ESP8266-Websocket-master\\sha1.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_ICM20X\\Adafruit_ICM20649.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_ICM20X\\Adafruit_ICM20948.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_ICM20X\\Adafruit_ICM20X.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_BusIO_Register.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_I2CDevice.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_BusIO\\Adafruit_SPIDevice.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\Wire\\src\\Wire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\enzo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.14\\libraries\\SPI\\src\\SPI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "c:\\Users\\enzo\\OneDrive\\Documentos\\Arduino\\libraries\\Adafruit_Unified_Sensor\\Adafruit_Sensor.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
