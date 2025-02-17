@@ -1,10 +1,11 @@
-
 import 'dart:async';
-import 'esp32_deployer.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:ararads/arara_connection.dart' as araraConnection;
 import 'package:ararads/joystick.dart' as joystick;
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'esp32_deployer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,16 +13,17 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static const ColorScheme myColorScheme = ColorScheme(
-    primary: Color.fromARGB(255,27,25,25), // Main purple
-    secondary: const Color(0xFF5D00D6), // Deep purple
-    surface: Colors.black, // Light gray
-    error: const Color(0xFFFD6A63), // Soft red from branding
-    onPrimary: Colors.white, // Text on primary color
-    onSecondary: Colors.white, // Text on secondary color
-    onSurface: Colors.black, // Text on surface
-    onError: Colors.white, // Text on error color
+    primary: Color.fromARGB(255, 27, 25, 25),
+    secondary: const Color(0xFF5D00D6),
+    surface: Color.fromARGB(255, 92, 0, 193),
+    error: const Color(0xFFFD6A63),
+    onPrimary: Colors.white,
+    onSecondary: Color(0xFFD0EC26),
+    onSurface: Colors.white,
+    onError: Colors.white,
     brightness: Brightness.dark,
-    tertiary: Color.fromARGB(255, 249, 249, 249) // Dark mode theme
+    tertiary: Color.fromARGB(255, 249, 249, 249),
+    onTertiary: Color.fromARGB(255, 27, 25, 25),
   );
 
   const MyApp({super.key});
@@ -34,16 +36,72 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: myColorScheme,
+          cardTheme: CardTheme(
+            color: myColorScheme.secondary, // Set the default background
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(12)), // Optional: Adds some shadow
+          ),
+          appBarTheme: AppBarTheme(
+            backgroundColor: myColorScheme.secondary,
+            elevation: 8,
+            shadowColor: Colors.black.withValues(alpha: 0.5),
+            titleTextStyle: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: myColorScheme.onPrimary,
+            ),
+          ),
           textTheme: const TextTheme(
-            displayLarge: TextStyle(fontFamily: 'Poppins', fontSize: 32, fontWeight: FontWeight.bold),
-            displayMedium: TextStyle(fontFamily: 'Poppins', fontSize: 28, fontWeight: FontWeight.bold),
-            displaySmall: TextStyle(fontFamily: 'Poppins', fontSize: 24, fontWeight: FontWeight.w500),
-            bodyLarge: TextStyle(fontFamily: 'Poppins', fontSize: 18),
+            displayLarge: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 32,
+                fontWeight: FontWeight.normal),
+            displayMedium: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 28,
+                fontWeight: FontWeight.normal),
+            displaySmall: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 27,
+                fontWeight: FontWeight.w200),
+            bodyLarge: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 18,
+                fontWeight: FontWeight.w500),
             bodyMedium: TextStyle(fontFamily: 'Poppins', fontSize: 16),
             bodySmall: TextStyle(fontFamily: 'Poppins', fontSize: 14),
-            labelLarge: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.bold),
-            labelMedium: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.bold),
-            labelSmall: TextStyle(fontFamily: 'Poppins', fontSize: 12, fontWeight: FontWeight.bold),
+            labelLarge: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.normal),
+            labelMedium: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                fontWeight: FontWeight.normal),
+            labelSmall: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 12,
+                fontWeight: FontWeight.normal),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              padding: WidgetStatePropertyAll(
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+              ),
+              textStyle: WidgetStatePropertyAll(
+                const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
         home: const MyHomePage(),
@@ -66,8 +124,6 @@ class MyAppState extends ChangeNotifier {
   Timer? sendControllerTimer;
   int elseTickCount = 0;
 
-
-
   MyAppState() {
     _startPingMonitoring();
     checkControllers();
@@ -76,51 +132,53 @@ class MyAppState extends ChangeNotifier {
 
   void _startPingMonitoring() {
     pingTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
-    isReachable = await icmpPing.checkPing();
-    if(isReachable && !wantedToDisconnect && !araraConnectedViaWiFi){
-      websocketConnection.connectWifi();
-      araraConnectedViaWiFi = isReachable;
-    }else if(!wantedToDisconnect){
-      araraConnectedViaWiFi = isReachable;
-    }
-    notifyListeners();
+      isReachable = await icmpPing.checkPing();
+      if (isReachable && !wantedToDisconnect && !araraConnectedViaWiFi) {
+        websocketConnection.connectWifi();
+        araraConnectedViaWiFi = isReachable;
+      } else if (!wantedToDisconnect) {
+        araraConnectedViaWiFi = isReachable;
+      }
+      notifyListeners();
     });
   }
 
-    void checkControllers() {
-    checkControllerTimer = Timer.periodic(const Duration(milliseconds: 200), (timer) async {
-    if(controllers.controllerConnectedOrDisconnected()){
-      controllers.initialize();
-    }
-    notifyListeners();
+  void checkControllers() {
+    checkControllerTimer =
+        Timer.periodic(const Duration(milliseconds: 200), (timer) async {
+      if (controllers.controllerConnectedOrDisconnected()) {
+        controllers.initialize();
+      }
+      notifyListeners();
     });
   }
 
   void sendControllerValues() {
-    sendControllerTimer = Timer.periodic(const Duration(milliseconds: 25), (timer) async {
-    try {
-      if (araraConnectedViaWiFi && isEnabled) {
-        controllers.setControllerState(isEnabled);
-        await websocketConnection.sendValues(controllers.getJson());
-        disableSetted = false;
-        elseTickCount = 0;
-      } else {
-        if (!disableSetted && araraConnectedViaWiFi) {
-          controllers.setControllerState(false);
+    sendControllerTimer =
+        Timer.periodic(const Duration(milliseconds: 25), (timer) async {
+      try {
+        if (araraConnectedViaWiFi && isEnabled) {
+          controllers.setControllerState(isEnabled);
           await websocketConnection.sendValues(controllers.getJson());
-          elseTickCount++;
+          disableSetted = false;
+          elseTickCount = 0;
+        } else {
+          if (!disableSetted && araraConnectedViaWiFi) {
+            controllers.setControllerState(false);
+            await websocketConnection.sendValues(controllers.getJson());
+            elseTickCount++;
+          }
+          if (elseTickCount >= 5) {
+            disableSetted = true;
+          }
         }
-        if (elseTickCount >= 5) {
-          disableSetted = true;
-        }
+      } catch (e) {
+        print('Error sending values: $e');
+        wantedToDisconnect = true;
+        websocketConnection.disconnectWifi();
+        araraConnectedViaWiFi = false;
       }
-    } catch (e) {
-      print('Error sending values: $e');
-      wantedToDisconnect = true;
-      websocketConnection.disconnectWifi();
-      araraConnectedViaWiFi = false;
-    }
-    notifyListeners();
+      notifyListeners();
     });
   }
 
@@ -134,11 +192,11 @@ class MyAppState extends ChangeNotifier {
     if ((!araraConnectedViaWiFi && !wantedToDisconnect) || !isReachable) {
       showDisconnectedMessage(context);
     } else {
-      if(araraConnectedViaWiFi){
+      if (araraConnectedViaWiFi) {
         wantedToDisconnect = true;
         websocketConnection.disconnectWifi();
         araraConnectedViaWiFi = false;
-      }else{
+      } else {
         final success = await websocketConnection.connectWifi();
         araraConnectedViaWiFi = success;
         wantedToDisconnect = false;
@@ -166,7 +224,7 @@ class MyAppState extends ChangeNotifier {
       },
     );
   }
-  
+
   void toggleEnabled() {
     isEnabled = !isEnabled; // Alterna entre habilitar e desabilitar
     notifyListeners();
@@ -197,67 +255,87 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
-}
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+    }
+    return LayoutBuilder(builder: (context, constraints) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           automaticallyImplyLeading: false,
-          iconTheme: IconTheme.of(context),
-          leadingWidth: 200,
-          leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 5.0),
-            child: 
-              Image.asset("assets/Easy Steam/Logo/Logo principal/2.png"),
+          centerTitle: true,
+          leadingWidth: 250,
+          leading: Transform.scale(
+            scale: 6.0,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              child: Image.asset(
+                "assets/Easy Steam/Logo/Logo principal/1.png",
+                fit: BoxFit.contain,
+              ),
             ),
+          ),
           title: Text(
             'Painel de Controle',
-            style: Theme.of(context).textTheme.displaySmall
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSecondary,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withValues(alpha: 0.3),
+                  offset: Offset(2, 2),
+                  blurRadius: 4,
+                ),
+              ],
             ),
           ),
-          body: Row(
-            children: [
-              SafeArea(
-                child: NavigationRail(
-                  backgroundColor: Theme.of(context).colorScheme.tertiary,
-                  minExtendedWidth: 200,
-                  extended: false,
-                  destinations: const [
-                    NavigationRailDestination(
-                      icon: Icon(Icons.home),
-                      label: Text('Página Inicial'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.code),
-                      label: Text('Códigos Prontos'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.network_wifi_3_bar),
-                      label: Text('Diagnóstico'),
-                    ),
-                  ],
-                  selectedIndex: selectedIndex,
-                  onDestinationSelected: (value) {
-                    setState(() {
-                      selectedIndex = value;
-                    });
-                  },
-                ),
+        ),
+        body: Row(
+          children: [
+            SafeArea(
+              child: NavigationRail(
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                minExtendedWidth: 200,
+                extended: false,
+                destinations: const [
+                  NavigationRailDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('Página Inicial'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.code),
+                    label: Text('Códigos Prontos'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.network_wifi_3_bar),
+                    label: Text('Diagnóstico'),
+                  ),
+                ],
+                selectedIndex: selectedIndex,
+                selectedIconTheme: IconThemeData(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSecondary), // Keeps selected icon in the theme color
+                unselectedIconTheme: const IconThemeData(
+                    color: Colors.black), // Makes unselected icons black
+                onDestinationSelected: (value) {
+                  setState(() {
+                    selectedIndex = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  child: page,
-                ),
+            ),
+            Expanded(
+              child: Container(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: page,
               ),
-            ],
-          ),
-        );
-      }
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
-  
 }
 
 class HomePage extends StatelessWidget {
@@ -265,104 +343,164 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>(); 
+    var appState = context.watch<MyAppState>();
     TextTheme theme = Theme.of(context).textTheme;
     return Container(
       child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             AnimatedOpacity(
               opacity: appState.araraConnectedViaWiFi ? 1.0 : 0,
               duration: const Duration(milliseconds: 500),
-              child: appState.araraConnectedViaWiFi ? ElevatedButton(
-                onPressed: () {
-                  appState.toggleEnabled();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: appState.isEnabled ? Colors.red : Colors.green,
-                ),
-                child: Text(
-                  style: theme.labelLarge,
-                  appState.isEnabled ? 'Desabilitar' : 'Habilitar',
-                ),
-              ) : const SizedBox.shrink(),
-            ),
-          const SizedBox(height: 20),
-                  Card(
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: Center(
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 10,),
-                            Text("Conexão", style: theme.bodyLarge),
-                            const SizedBox(width: 30,),
-                            Icon(appState.araraConnectedViaWiFi ? Icons.signal_cellular_4_bar_outlined : 
-                            Icons.signal_cellular_connected_no_internet_0_bar_outlined)
-                          ],
-                        ),
-                      )
-                    ),
-                  ),
-                  const SizedBox(height: 50,), 
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      await appState.useConnectButton(context);
-                    },
-                    label: appState.araraConnectedViaWiFi ?  const Text('Disconectar') : const Text('Conectar'),
-                  ),
-            const SizedBox(height: 50),
-          if (appState.controllers.availableControllers.isNotEmpty)
-            Center(
-              child: SizedBox(
-                width: 200, // Defina a largura desejada para a lista
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: appState.controllers.availableControllers.length,
-                  itemBuilder: (context, index) {
-                    final controller =
-                        appState.controllers.availableControllers[index];
-                    final isButtonPressed = appState.controllers.jsonArray[index].entries
-                    .where((entry) => entry.key != 'EN')
-                    .any((entry) => entry.value == true);
-                    return ListTile(
-                      leading: Icon(Icons.gamepad,
-                          color: isButtonPressed ? Colors.green : Colors.grey),
-                      title: Text('Controle ${controller.index}'),
-                      subtitle: Text('Status: Conectado'),
-                      tileColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+              child: appState.araraConnectedViaWiFi
+                  ? ElevatedButton(
+                      onPressed: () {
+                        appState.toggleEnabled();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: appState.isEnabled
+                              ? Colors.red
+                              : Theme.of(context).colorScheme.onSecondary),
+                      child: Text(
+                        style: theme.labelLarge,
+                        appState.isEnabled ? 'Desabilitar' : 'Habilitar',
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16.0),
-                    );
-                  },
-                ),
-              ),
-            )
-          else
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            const SizedBox(height: 20),
             Card(
               child: SizedBox(
-                height: 50,
-                width: 250,
-                child: Center(
-                  child: Text(
-                    'Nenhum controle conectado',
-                    style: theme.labelLarge
+                  width: 145,
+                  height: 50,
+                  child: Center(
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text("Conexão", style: theme.bodyLarge),
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        Icon(
+                            appState.araraConnectedViaWiFi
+                                ? Icons.signal_cellular_4_bar_outlined
+                                : Icons
+                                    .signal_cellular_connected_no_internet_0_bar_outlined,
+                            color: appState.araraConnectedViaWiFi
+                                ? Theme.of(context).colorScheme.onSecondary
+                                : Theme.of(context).colorScheme.error)
+                      ],
+                    ),
+                  )),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            connectToAraraButton(appState, context),
+            const SizedBox(height: 50),
+            if (appState.controllers.availableControllers.isNotEmpty)
+              listOfConnectedControllers(appState)
+            else
+              Card(
+                child: SizedBox(
+                  height: 50,
+                  width: 250,
+                  child: Center(
+                    child: Text('Nenhum controle conectado',
+                        style: theme.labelLarge),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
     );
   }
-}
 
+  Center listOfConnectedControllers(MyAppState appState) {
+    return Center(
+      child: SizedBox(
+        width: 200, // Defina a largura desejada para a lista
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: appState.controllers.availableControllers.length,
+          itemBuilder: (context, index) {
+            final controller = appState.controllers.availableControllers[index];
+            final isButtonPressed = appState
+                .controllers.jsonArray[index].entries
+                .where((entry) => entry.key != 'EN')
+                .any((entry) => entry.value == true);
+            return ListTile(
+              leading: Icon(Icons.gamepad,
+                  color: isButtonPressed ? Colors.green : Colors.grey),
+              title: Text('Controle ${controller.index}'),
+              subtitle: Text('Status: Conectado'),
+              tileColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton connectToAraraButton(
+      MyAppState appState, BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: () async {
+        await appState.useConnectButton(context);
+      },
+      style: ButtonStyle(
+        backgroundColor: WidgetStateColor.resolveWith(
+          (Set<WidgetState> states) {
+            return appState.araraConnectedViaWiFi
+                ? Theme.of(context)
+                    .colorScheme
+                    .onError // Red when disconnecting
+                : Colors.green; // Green when connecting
+          },
+        ),
+        foregroundColor: WidgetStateColor.resolveWith(
+          (Set<WidgetState> states) {
+            return appState.araraConnectedViaWiFi
+                ? Colors.white // White text when disconnecting
+                : Theme.of(context)
+                    .colorScheme
+                    .secondary; // Secondary-colored text when connecting
+          },
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        padding: WidgetStatePropertyAll(
+          const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        ),
+        textStyle: WidgetStatePropertyAll(
+          const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      icon: Icon(
+        appState.araraConnectedViaWiFi ? Icons.wifi_off : Icons.wifi,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
+      label: Text(
+        style: Theme.of(context).textTheme.labelLarge,
+        appState.araraConnectedViaWiFi ? 'Desconectar' : 'Conectar',
+      ),
+    );
+  }
+}
 
 class UploadPage extends StatefulWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -377,8 +515,8 @@ class _UploadPageState extends State<UploadPage> {
   bool _isUploading = false; // Status do upload
   String _statusMessage = ''; // Mensagem de status do upload
 
-  _UploadPageState(){
-    initializeDeployer(); 
+  _UploadPageState() {
+    initializeDeployer();
   }
   // Lista de códigos prontos para seleção
   final List<String> _availableCodes = [
@@ -394,7 +532,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Future<void> initializeDeployer() async {
-    deployer = await Esp32Deployer.create(); 
+    deployer = await Esp32Deployer.create();
   }
 
   Future<void> _uploadFile() async {
