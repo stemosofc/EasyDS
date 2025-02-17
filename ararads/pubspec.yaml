@@ -1,5 +1,5 @@
-name: ararads
-description: "A new Flutter project."
+name: EasyDS
+description: "A estação de pilotos da EasySTEAM!"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -48,6 +48,8 @@ dependencies:
   usb_serial: ^0.5.2
   process_run: ^1.2.2
   open_file: ^3.5.10
+  path_provider: ^2.1.2
+  archive: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
     - assets/Easy Steam/Logo/Logo principal/4.png
     - assets/Easy Steam/Logo/Ícone/2.png
     - assets/ide/EasySTEAM_IDE.exe
+    - assets/ide/_internal.zip
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

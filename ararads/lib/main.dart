@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:ararads/easy_IDE.dart';
-import 'package:ararads/easy_stem_connection.dart' as araraConnection;
-import 'package:ararads/joystick.dart' as joystick;
+import 'package:EasyDS/easy_IDE.dart';
+import 'package:EasyDS/easy_stem_connection.dart' as araraConnection;
+import 'package:EasyDS/joystick.dart' as joystick;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -115,7 +115,7 @@ class MyAppState extends ChangeNotifier {
   final websocketConnection = araraConnection.websocketConnection();
   final icmpPing = araraConnection.ICMPPingManager('192.168.4.1');
   final controllers = joystick.Joystick();
-  final easyIDE = EasyIDE('assets/ide/EasySTEAM_IDE.exe');
+  final easyIDE = EasyIDE();
   bool araraConnectedViaWiFi = false;
   bool isEnabled = false;
   bool isReachable = false;
@@ -208,7 +208,7 @@ class MyAppState extends ChangeNotifier {
   }
 
   Future<void> openEasyIDE() async {
-    easyIDE.execute();
+    easyIDE.installAndRun();
     notifyListeners();
   }
 
