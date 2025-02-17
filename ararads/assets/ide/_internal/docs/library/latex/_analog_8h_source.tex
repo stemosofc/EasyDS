@@ -1,0 +1,24 @@
+\doxysection{Analog.\+h}
+\hypertarget{_analog_8h_source}{}\label{_analog_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Analog.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Analog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ANALOG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ANALOH\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Classe\ utilizada\ tanto\ para\ input\ como\ output\ de\ dispositivos\ analógicos}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_analog}{Analog}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_analog_a5c254951c0869dda4d1172002b43b126}{Analog}}(\textcolor{keywordtype}{void});\ \ \textcolor{comment}{//\ Construtor\ da\ classe\ analógica}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_analog_a1f70e0a525ce38ca04428a9516a86eb6}{getAnalogInput}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Obtém\ uma\ entrada\ analógica\ do\ sensor\ acoplado}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_analog_a1a39fd32c21fba3e9cef31996ffdfe10}{setAnalogOutput}}(\textcolor{keywordtype}{int}\ duty);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Define\ uma\ saída\ analógica}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_ANALOGICA\ =\ 17;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ A\ única\ porta\ de\ servo\ na\ placa}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SAIDA\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Caso\ for\ utilizar\ a\ porta\ analógica\ para\ saída}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ENTRADA\ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Caso\ for\ utilizar\ a\ porta\ analógica\ para\ entrada}}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,41 @@
+\doxysection{Objects.\+h}
+\hypertarget{_objects_8h_source}{}\label{_objects_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Objects.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Objects.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Motor.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Digital.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}ServoOS.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Analog.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}IMU.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}PID.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_motor}{Motor}}\ motor1;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_motor}{Motor}}\ motor2;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_motor}{Motor}}\ motor3;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_motor}{Motor}}\ motor4;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_servo_o_s}{ServoOS}}\ servo1;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_servo_o_s}{ServoOS}}\ servo2;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_servo_o_s}{ServoOS}}\ servo3;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_digital}{Digital}}\ di1;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_digital}{Digital}}\ di2;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_digital}{Digital}}\ di3;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_digital}{Digital}}\ di4;}
+\DoxyCodeLine{00024\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_digital}{Digital}}\ di5;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_i_m_u}{IMU}}\ imu;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_control}{Control}}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classstem_wi_fi}{stemWiFi}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ stopAll();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ enableAll();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ disableMotors();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ disableServos();}
+\DoxyCodeLine{00035\ \};}
+
+\end{DoxyCode}

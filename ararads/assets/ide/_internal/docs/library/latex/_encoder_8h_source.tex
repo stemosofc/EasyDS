@@ -1,0 +1,29 @@
+\doxysection{Encoder.\+h}
+\hypertarget{_encoder_8h_source}{}\label{_encoder_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Encoder.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Encoder.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENCODER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENCODER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}ESP32Encoder.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Classe\ wrapper\ de\ encoder}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_encoder}{Encoder}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_encoder}{Encoder}}(\textcolor{keywordtype}{int}\ entrada);\ \textcolor{comment}{//\ Construtor\ da\ classe\ encoder}}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_encoder}{Encoder}}(\textcolor{keywordtype}{void});\ \textcolor{comment}{//\ Construtor\ vazio}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_encoder_aa0b6bc685d41df5a6ce30424c5845a72}{getPosition}}();\ \textcolor{comment}{//\ Obtém\ a\ posição\ do\ encoder}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_encoder_aad12cf301f22e3037cdf9ea70fe388af}{setPosition}}(\textcolor{keywordtype}{int}\ position);\ \textcolor{comment}{//\ Define\ a\ posição\ do\ encoder}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_encoder_aeb46aee97e660707844d7c14e7e90add}{setPositionFactor}}(\textcolor{keywordtype}{double}\ factor);\ \textcolor{comment}{//\ Define\ o\ fator\ de\ conversão\ do\ encoder}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_encoder_a8ad34a60288f78310ee465da3832b405}{reset}}();}
+\DoxyCodeLine{00015\ \ \ \ \ ESP32Encoder\ encoder;\ \textcolor{comment}{//\ Objeto\ do\ encoder\ da\ bibilioteca}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_1\_ENCODER\ =\ 1;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_2\_ENCODER\ =\ 2;}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ pinAEncoder;\ \textcolor{comment}{//\ Encoder\ pino\ A}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ pinBEncoder;\ \textcolor{comment}{//\ Encoder\ pino\ B}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ factor\ =\ 1;\ \textcolor{comment}{//\ variável\ que\ guarda\ o\ valor\ do\ fator\ de\ conversão}}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

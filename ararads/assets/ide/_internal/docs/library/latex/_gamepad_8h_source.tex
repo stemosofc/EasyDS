@@ -1,0 +1,39 @@
+\doxysection{Gamepad.\+h}
+\hypertarget{_gamepad_8h_source}{}\label{_gamepad_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Gamepad.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Gamepad.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GAMEPAD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GAMEPAD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_gamepad}{Gamepad}}\ \{}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_gamepad}{Gamepad}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gamepad_a9fd668bb971376b155656333ba18c45f}{applyDeadband}}(\textcolor{keywordtype}{double}\ deadband\ =\ 0.01);}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_ad9834f51ad3c6fceb839191e64f59ed4}{getLeftAxisY}}();}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_aba8a2bdbad078daacc8a57cfb2a4398b}{getLeftAxisX}}();}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_ad906f5b906a3cf111d1e409abfe8c079}{getRightAxisY}}();}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_a946aa991a52088bb0302bac181abad1b}{getRightAxisX}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_a339830373a96688777e38f49eee21824}{getButtonA}}();}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_a584ebade297ca0fcb5f16026b3555b04}{getButtonB}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_aa5f0cf5a13771d063c23999ec423f139}{getButtonX}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_a81abdb583d3fd5023aa80eb208b69c72}{getButtonY}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_acf6e32b15e05493958cbdccd5c58251c}{getRightBumper}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_gamepad_ab4414353e00a33f4f3a3ac7570dfd160}{getLeftBumper}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_a61793229776c469eddb189732b064e2d}{getRightTrigger}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_gamepad_a834e9fee7f84dceaf4a67272dfb2161f}{getLeftTrigger}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ JsonDocument\ gamepad;}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ deadband\ =\ 0.01;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ maxMagnitude\ =\ 1;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{double}\ getValue(\textcolor{keywordtype}{double}\ value);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ status();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ reset();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classstem_wi_fi}{stemWiFi}};}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

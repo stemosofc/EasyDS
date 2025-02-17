@@ -1,0 +1,132 @@
+\doxysection{Encoder Class Reference}
+\hypertarget{class_encoder}{}\label{class_encoder}\index{Encoder@{Encoder}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_encoder_ae974e7f593fd4f50b3d4b5d9152c9bd8}{Encoder}} (int entrada)
+\begin{DoxyCompactList}\small\item\em Cria um objeto de \doxylink{class_encoder}{Encoder}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_encoder_aa0b6bc685d41df5a6ce30424c5845a72}{get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Retorna a posição do encoder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_encoder_aad12cf301f22e3037cdf9ea70fe388af}{set\+Position}} (int position)
+\begin{DoxyCompactList}\small\item\em Define a posição do encoder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_encoder_aeb46aee97e660707844d7c14e7e90add}{set\+Position\+Factor}} (double factor)
+\begin{DoxyCompactList}\small\item\em Define o fator de conversão utilizado no cálculo do encoder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_encoder_a8ad34a60288f78310ee465da3832b405}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Zera a leitura do encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_encoder_a58cb8d6b8d7120ebce5caf9db67a86a2}\label{class_encoder_a58cb8d6b8d7120ebce5caf9db67a86a2} 
+ESP32\+Encoder {\bfseries encoder}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_encoder_a08102c16292040aca6d1a2a8236afd75}\label{class_encoder_a08102c16292040aca6d1a2a8236afd75} 
+static const int {\bfseries PORTA\+\_\+1\+\_\+\+ENCODER} = 1
+\item 
+\Hypertarget{class_encoder_a2ed6992503476603a00a70b3f2f77d22}\label{class_encoder_a2ed6992503476603a00a70b3f2f77d22} 
+static const int {\bfseries PORTA\+\_\+2\+\_\+\+ENCODER} = 2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_encoder_ae974e7f593fd4f50b3d4b5d9152c9bd8}\index{Encoder@{Encoder}!Encoder@{Encoder}}
+\index{Encoder@{Encoder}!Encoder@{Encoder}}
+\doxysubsubsection{\texorpdfstring{Encoder()}{Encoder()}}
+{\footnotesize\ttfamily \label{class_encoder_ae974e7f593fd4f50b3d4b5d9152c9bd8} 
+Encoder\+::\+Encoder (\begin{DoxyParamCaption}\item[{int}]{entrada}{}\end{DoxyParamCaption})}
+
+
+
+Cria um objeto de \doxylink{class_encoder}{Encoder}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em entrada} & -\/ porta que o encoder está conectado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_encoder_aa0b6bc685d41df5a6ce30424c5845a72}\index{Encoder@{Encoder}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Encoder@{Encoder}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily \label{class_encoder_aa0b6bc685d41df5a6ce30424c5845a72} 
+double Encoder\+::get\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retorna a posição do encoder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double. 
+\end{DoxyReturn}
+\Hypertarget{class_encoder_a8ad34a60288f78310ee465da3832b405}\index{Encoder@{Encoder}!reset@{reset}}
+\index{reset@{reset}!Encoder@{Encoder}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{class_encoder_a8ad34a60288f78310ee465da3832b405} 
+void Encoder\+::reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Zera a leitura do encoder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+\Hypertarget{class_encoder_aad12cf301f22e3037cdf9ea70fe388af}\index{Encoder@{Encoder}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Encoder@{Encoder}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily \label{class_encoder_aad12cf301f22e3037cdf9ea70fe388af} 
+void Encoder\+::set\+Position (\begin{DoxyParamCaption}\item[{int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Define a posição do encoder. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em position} & -\/ posição a ser definida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double. 
+\end{DoxyReturn}
+\Hypertarget{class_encoder_aeb46aee97e660707844d7c14e7e90add}\index{Encoder@{Encoder}!setPositionFactor@{setPositionFactor}}
+\index{setPositionFactor@{setPositionFactor}!Encoder@{Encoder}}
+\doxysubsubsection{\texorpdfstring{setPositionFactor()}{setPositionFactor()}}
+{\footnotesize\ttfamily \label{class_encoder_aeb46aee97e660707844d7c14e7e90add} 
+void Encoder\+::set\+Position\+Factor (\begin{DoxyParamCaption}\item[{double}]{factor}{}\end{DoxyParamCaption})}
+
+
+
+Define o fator de conversão utilizado no cálculo do encoder. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em factor} & -\/ define uma posição para o encoder \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Encoder.\+h\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Encoder.\+cpp\end{DoxyCompactItemize}

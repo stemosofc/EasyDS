@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:ararads/arara_connection.dart' as araraConnection;
+import 'package:ararads/easy_IDE.dart';
+import 'package:ararads/easy_stem_connection.dart' as araraConnection;
 import 'package:ararads/joystick.dart' as joystick;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
             labelLarge: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 16,
-                fontWeight: FontWeight.normal),
+                fontWeight: FontWeight.w400),
             labelMedium: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,
@@ -114,6 +115,7 @@ class MyAppState extends ChangeNotifier {
   final websocketConnection = araraConnection.websocketConnection();
   final icmpPing = araraConnection.ICMPPingManager('192.168.4.1');
   final controllers = joystick.Joystick();
+  final easyIDE = EasyIDE('assets/ide/EasySTEAM_IDE.exe');
   bool araraConnectedViaWiFi = false;
   bool isEnabled = false;
   bool isReachable = false;
@@ -205,6 +207,11 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> openEasyIDE() async {
+    easyIDE.execute();
+    notifyListeners();
+  }
+
   void showDisconnectedMessage(BuildContext context) {
     showDialog(
       context: context,
@@ -243,6 +250,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Widget page;
+    var appState = context.watch<MyAppState>();
+
     switch (selectedIndex) {
       case 0:
         page = const HomePage();
@@ -269,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
               child: Image.asset(
-                "assets/Easy Steam/Logo/Logo principal/1.png",
+                "assets/Easy Steam/Logo/Logo principal/4.png",
                 fit: BoxFit.contain,
               ),
             ),
@@ -279,7 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               shadows: [
                 Shadow(
                   color: Colors.black.withValues(alpha: 0.3),
@@ -294,6 +303,22 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             SafeArea(
               child: NavigationRail(
+                leading: IconButton(
+                  iconSize: 150, // Set button size
+                  icon: SizedBox(
+                    height: 80, // Set height
+                    width: 80, // Set width
+                    child: Image.asset(
+                      'assets/Easy Steam/Logo/Ícone/2.png',
+                      fit: BoxFit
+                          .contain, // Adjust image to fill the box properly
+                    ),
+                  ),
+                  tooltip: "Easy IDE Blocks",
+                  onPressed: () {
+                    appState.openEasyIDE();
+                  },
+                ),
                 backgroundColor: Theme.of(context).colorScheme.tertiary,
                 minExtendedWidth: 200,
                 extended: false,

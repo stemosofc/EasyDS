@@ -1,0 +1,37 @@
+\doxysection{Motor.\+h}
+\hypertarget{_motor_8h_source}{}\label{_motor_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Motor.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/Motor.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOTOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOTOR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Encoder.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_motor}{Motor}}\ \{}
+\DoxyCodeLine{00007\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{class_motor_a24fdac72fbddcfd8153d5d176fab92d0}{Motor}}(\textcolor{keywordtype}{int}\ entrada,\ \textcolor{keywordtype}{bool}\ reverse);\ \textcolor{comment}{//\ Construtor\ da\ classe\ motor}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_motor_a51b921d43508a0de68b27d32e229c52e}{setPower}}(\textcolor{keywordtype}{double}\ power);\ \textcolor{comment}{//\ Define\ a\ velocidade\ do\ motor\ (-\/1.0\ a\ 1.0)}}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_encoder}{Encoder}}\ encoder;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_1\ =\ 1;\ \textcolor{comment}{//\ Portas\ de\ motor\ da\ placa}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_2\ =\ 2;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_3\ =\ 3;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PORTA\_4\ =\ 4;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ REVERSE\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ Direções\ do\ motor}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ FORWARD\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ pinPWMA;\ \textcolor{comment}{//\ Pino\ PWM\ A}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ pinPWMB;\ \textcolor{comment}{//\ Pino\ PWM\ B}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ channelA;\ \textcolor{comment}{//\ Canal\ PWM\ A}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ channelB;\ \textcolor{comment}{//\ Canal\ PWM\ B}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ pinos(\textcolor{keywordtype}{int}\ entrada);\ \textcolor{comment}{//\ Configura\ os\ pinos\ com\ base\ na\ porta\ do\ motor}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ stop();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ enable();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ connection;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ RESOLUTION\ =\ 10;\ \textcolor{comment}{//\ Resolução\ (bits)\ do\ canal\ PWM\ (1024)}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ FREQUENCY\ =\ 10000;\ \textcolor{comment}{//\ Frequência\ do\ canal}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MAX\_OUTPUT\ =\ 1002;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_control}{Control}};}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
