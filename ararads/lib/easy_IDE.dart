@@ -23,28 +23,22 @@ class EasyIDE {
 
   Future<void> installAndRun() async {
     try {
-      // Get a writable directory
       Directory appDir = await getApplicationSupportDirectory();
       String targetPath = '${appDir.path}/EasySTEAM_IDE/';
 
-      // Ensure main directory exists
       Directory(targetPath).createSync(recursive: true);
 
-      // Copy the .exe file to the app directory
       await copyAssetFile(
           'assets/ide/EasySTEAM_IDE.exe', '$targetPath/EasySTEAM_IDE.exe');
 
-      // Extract _internal.zip to the same directory
       await extractZip('assets/ide/_internal.zip', targetPath);
 
-      // Run the executable with the correct working directory
       Process.run('powershell', [
-        'Start-Process',
-        '$targetPath/EasySTEAM_IDE.exe',
-        '-WorkingDirectory',
-        targetPath,
-        '-Verb',
-        'runAs'
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-Command',
+        "Start-Process -FilePath '$targetPath/EasySTEAM_IDE.exe' -WorkingDirectory '$targetPath' -Verb runAs"
       ]);
 
       print('EasySTEAM IDE installed and launched successfully.');

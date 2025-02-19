@@ -41,8 +41,11 @@ class MyApp extends StatelessWidget {
             color: myColorScheme.secondary, // Set the default background
             elevation: 4,
             shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(12)), // Optional: Adds some shadow
+              borderRadius:
+                  BorderRadius.circular(10), // Softer corners than buttons
+              side: BorderSide(
+                  color: myColorScheme.onSecondary, width: 1), // Subtle border
+            ),
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: myColorScheme.secondary,
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
               color: myColorScheme.onPrimary,
             ),
           ),
-          textTheme: const TextTheme(
+          textTheme: TextTheme(
             displayLarge: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 32,
@@ -76,7 +79,8 @@ class MyApp extends StatelessWidget {
             labelLarge: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 16,
-                fontWeight: FontWeight.w400),
+                fontWeight: FontWeight.w600,
+                color: myColorScheme.secondary),
             labelMedium: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,
@@ -485,10 +489,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: WidgetStateColor.resolveWith(
           (Set<WidgetState> states) {
             return appState.araraConnectedViaWiFi
-                ? Theme.of(context)
+                ? Theme.of(context).colorScheme.error // Red when disconnecting
+                : Theme.of(context)
                     .colorScheme
-                    .onError // Red when disconnecting
-                : Colors.green; // Green when connecting
+                    .onSecondary; // Green when connecting
           },
         ),
         foregroundColor: WidgetStateColor.resolveWith(
@@ -515,13 +519,16 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      label: Text(
+        style: Theme.of(context)
+            .textTheme
+            .labelLarge
+            ?.copyWith(color: Theme.of(context).colorScheme.secondary),
+        appState.araraConnectedViaWiFi ? 'Desconectar' : 'Conectar',
+      ),
       icon: Icon(
         appState.araraConnectedViaWiFi ? Icons.wifi_off : Icons.wifi,
-        color: Theme.of(context).colorScheme.onPrimary,
-      ),
-      label: Text(
-        style: Theme.of(context).textTheme.labelLarge,
-        appState.araraConnectedViaWiFi ? 'Desconectar' : 'Conectar',
+        color: Theme.of(context).colorScheme.secondary,
       ),
     );
   }
