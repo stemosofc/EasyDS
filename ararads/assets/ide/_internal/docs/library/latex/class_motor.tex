@@ -1,0 +1,92 @@
+\doxysection{Motor Class Reference}
+\hypertarget{class_motor}{}\label{class_motor}\index{Motor@{Motor}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_motor_a24fdac72fbddcfd8153d5d176fab92d0}{Motor}} (int entrada, bool reverse)
+\begin{DoxyCompactList}\small\item\em Cria um objeto de \doxylink{class_motor}{Motor}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_motor_a51b921d43508a0de68b27d32e229c52e}{set\+Power}} (double power)
+\begin{DoxyCompactList}\small\item\em Define a velocidade do motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_motor_a9510a109c4dbab498d6af583f4ddc744}\label{class_motor_a9510a109c4dbab498d6af583f4ddc744} 
+\mbox{\hyperlink{class_encoder}{Encoder}} {\bfseries encoder}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_motor_aef5b47c70f03ad0210357346f8e00bfc}\label{class_motor_aef5b47c70f03ad0210357346f8e00bfc} 
+static const int {\bfseries PORTA\+\_\+1} = 1
+\item 
+\Hypertarget{class_motor_ad4707a713d2c02a52632c275a782fd60}\label{class_motor_ad4707a713d2c02a52632c275a782fd60} 
+static const int {\bfseries PORTA\+\_\+2} = 2
+\item 
+\Hypertarget{class_motor_a1faed8e16d0763c6efe84437bb60a369}\label{class_motor_a1faed8e16d0763c6efe84437bb60a369} 
+static const int {\bfseries PORTA\+\_\+3} = 3
+\item 
+\Hypertarget{class_motor_a881105996366c819e5ffdc4ebf13516a}\label{class_motor_a881105996366c819e5ffdc4ebf13516a} 
+static const int {\bfseries PORTA\+\_\+4} = 4
+\item 
+\Hypertarget{class_motor_a9db0f40d4afa82f0165905e10cfbacc8}\label{class_motor_a9db0f40d4afa82f0165905e10cfbacc8} 
+static const bool {\bfseries REVERSE} = true
+\item 
+\Hypertarget{class_motor_acb8c064df7e1da8d0ba21d2a217fc10a}\label{class_motor_acb8c064df7e1da8d0ba21d2a217fc10a} 
+static const bool {\bfseries FORWARD} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_motor_a9adf7c444a8611024541177662d4716a}\label{class_motor_a9adf7c444a8611024541177662d4716a} 
+class {\bfseries Control}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_motor_a24fdac72fbddcfd8153d5d176fab92d0}\index{Motor@{Motor}!Motor@{Motor}}
+\index{Motor@{Motor}!Motor@{Motor}}
+\doxysubsubsection{\texorpdfstring{Motor()}{Motor()}}
+{\footnotesize\ttfamily \label{class_motor_a24fdac72fbddcfd8153d5d176fab92d0} 
+Motor\+::\+Motor (\begin{DoxyParamCaption}\item[{int}]{entrada}{, }\item[{bool}]{reverse}{}\end{DoxyParamCaption})}
+
+
+
+Cria um objeto de \doxylink{class_motor}{Motor}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & entrada a porta na qual o motor esta conectado \\
+\hline
+{\em int} & reverse define se o motor deve ser invertido ou não \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_motor_a51b921d43508a0de68b27d32e229c52e}\index{Motor@{Motor}!setPower@{setPower}}
+\index{setPower@{setPower}!Motor@{Motor}}
+\doxysubsubsection{\texorpdfstring{setPower()}{setPower()}}
+{\footnotesize\ttfamily \label{class_motor_a51b921d43508a0de68b27d32e229c52e} 
+void Motor\+::set\+Power (\begin{DoxyParamCaption}\item[{double}]{power}{}\end{DoxyParamCaption})}
+
+
+
+Define a velocidade do motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em power} & -\/ range de \mbox{[}-\/1.\+0, 1.\+0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Motor.\+h\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Motor.\+cpp\end{DoxyCompactItemize}

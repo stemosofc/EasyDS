@@ -1,0 +1,91 @@
+\doxysection{Analog Class Reference}
+\hypertarget{class_analog}{}\label{class_analog}\index{Analog@{Analog}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_analog_a5c254951c0869dda4d1172002b43b126}{Analog}} (void)
+\begin{DoxyCompactList}\small\item\em Cria um objeto da porta analógica. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_analog_a1f70e0a525ce38ca04428a9516a86eb6}{get\+Analog\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Retorna o valor lido pela entrada analógica. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_analog_a1a39fd32c21fba3e9cef31996ffdfe10}{set\+Analog\+Output}} (int duty)
+\begin{DoxyCompactList}\small\item\em Define uma saída analógica. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_analog_a21903274566d90d5319826e47c451b95}\label{class_analog_a21903274566d90d5319826e47c451b95} 
+static const int {\bfseries PORTA\+\_\+\+ANALOGICA} = 17
+\item 
+\Hypertarget{class_analog_ad00133e1dcefbb8619c5b99f01345e77}\label{class_analog_ad00133e1dcefbb8619c5b99f01345e77} 
+static const int {\bfseries SAIDA} = 0
+\item 
+\Hypertarget{class_analog_a7e5f1746bd9a87220e6e1ebab7a4db62}\label{class_analog_a7e5f1746bd9a87220e6e1ebab7a4db62} 
+static const int {\bfseries ENTRADA} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_analog_a5c254951c0869dda4d1172002b43b126}\index{Analog@{Analog}!Analog@{Analog}}
+\index{Analog@{Analog}!Analog@{Analog}}
+\doxysubsubsection{\texorpdfstring{Analog()}{Analog()}}
+{\footnotesize\ttfamily \label{class_analog_a5c254951c0869dda4d1172002b43b126} 
+Analog\+::\+Analog (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Cria um objeto da porta analógica. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em entrada} & -\/ define a entrada do sensor analógico \\
+\hline
+\mbox{\texttt{ in}}  & {\em sensor\+Type} & -\/ saída ou entrada de dadoss \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_analog_a1f70e0a525ce38ca04428a9516a86eb6}\index{Analog@{Analog}!getAnalogInput@{getAnalogInput}}
+\index{getAnalogInput@{getAnalogInput}!Analog@{Analog}}
+\doxysubsubsection{\texorpdfstring{getAnalogInput()}{getAnalogInput()}}
+{\footnotesize\ttfamily \label{class_analog_a1f70e0a525ce38ca04428a9516a86eb6} 
+int Analog\+::get\+Analog\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retorna o valor lido pela entrada analógica. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}void\mbox{]}} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int. 
+\end{DoxyReturn}
+\Hypertarget{class_analog_a1a39fd32c21fba3e9cef31996ffdfe10}\index{Analog@{Analog}!setAnalogOutput@{setAnalogOutput}}
+\index{setAnalogOutput@{setAnalogOutput}!Analog@{Analog}}
+\doxysubsubsection{\texorpdfstring{setAnalogOutput()}{setAnalogOutput()}}
+{\footnotesize\ttfamily \label{class_analog_a1a39fd32c21fba3e9cef31996ffdfe10} 
+void Analog\+::set\+Analog\+Output (\begin{DoxyParamCaption}\item[{int}]{duty}{}\end{DoxyParamCaption})}
+
+
+
+Define uma saída analógica. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em duty} & -\/ valor da saída \mbox{[}0, 1023\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+N/A. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Analog.\+h\item 
+C\+:/\+Users/enzo/\+One\+Drive/\+Documentos/\+Platform\+IO/\+Projects/\+Arara\+Placa/lib/stem\+OSBoard/src/Analog.\+cpp\end{DoxyCompactItemize}

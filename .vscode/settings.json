@@ -1,3 +1,20 @@
 {
-    "cmake.sourceDirectory": "C:/EasySteam/EasySteamDS/EasyDS/ararads/windows"
+    "cmake.sourceDirectory": "C:/EasySteam/EasySteamDS/EasyDS/ararads/windows",
+
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+      },
+      "editor.detectIndentation": false,
+      "editor.formatOnSave": true,
+      "editor.stickyScroll.enabled": true,
+      "editor.renderWhitespace": "boundary",
+      "editor.scrollBeyondLastLine": false,
+      "editor.tabSize": 2,
+      "files.insertFinalNewline": true,
+      "files.trimTrailingWhitespace": true,
+      "git.autofetch": true,
+      "git.confirmSync": false,
+      "git.pullBeforeCheckout": true,
+      "java.configuration.updateBuildConfiguration": "automatic",
+      "java.server.launchMode": "Standard",
 }

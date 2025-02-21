@@ -1,0 +1,43 @@
+\doxysection{stem\+Wi\+Fi.\+h}
+\hypertarget{stem_wi_fi_8h_source}{}\label{stem_wi_fi_8h_source}\index{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/stemWiFi.h@{C:/Users/enzo/OneDrive/Documentos/PlatformIO/Projects/AraraPlaca/lib/stemOSBoard/src/stemWiFi.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}LED.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <AsyncTCP.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <ESPAsyncWebServer.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}esp32-\/hal-\/log.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Gamepad.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Objects.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classstem_wi_fi}{stemWiFi}}\ \{}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classstem_wi_fi}{stemWiFi}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ start();}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id}\ =\ -\/1;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ \ \textcolor{keywordtype}{char}*\ ssid\ =\ \textcolor{stringliteral}{"{}EasySTEAM\_"{}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password\ =\ \textcolor{stringliteral}{"{}password"{}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TIMEOUT\_DELAY\ =\ 100;}
+\DoxyCodeLine{00021\ \ \ \ \ AsyncWebServer\ *\ server;}
+\DoxyCodeLine{00022\ \ \ \ \ AsyncWebSocket\ *\ ws;}
+\DoxyCodeLine{00023\ \ \ \ \ JsonDocument\ handleReceivedMessage(String\ message);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ initWebServer();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ setChannel();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ disconnect(\textcolor{keywordtype}{bool}\ error=\textcolor{keyword}{false});}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ errorJson(DeserializationError\ error);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ onEvent(AsyncWebSocket\ *server,\ AsyncWebSocketClient\ *client,\ AwsEventType\ type,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *arg,\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ onEventWiFi(WiFiEvent\_t\ event);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ handleWebSocketMessage(\textcolor{keywordtype}{void}\ *arg,\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ previousTime\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ previousGamepadState\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ delay[5];}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_control}{Control}}\ control;}
+\DoxyCodeLine{00037\ \};}
+
+\end{DoxyCode}
