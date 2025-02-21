@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:EasyDS/DiagnosticsPage.dart';
+import 'package:EasyDS/UploadPage.dart';
 import 'package:EasyDS/easy_IDE.dart';
 import 'package:EasyDS/easy_stem_connection.dart' as araraConnection;
 import 'package:EasyDS/joystick.dart' as joystick;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'esp32_deployer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,13 +38,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: myColorScheme,
           cardTheme: CardTheme(
-            color: myColorScheme.secondary, // Set the default background
-            elevation: 4,
+            shadowColor: myColorScheme.primary,
+            elevation: 2,
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(10), // Softer corners than buttons
-              side: BorderSide(
-                  color: myColorScheme.onSecondary, width: 1), // Subtle border
+              borderRadius: BorderRadius.circular(16), // Softer rounded corners
             ),
           ),
           appBarTheme: AppBarTheme(
@@ -58,6 +55,17 @@ class MyApp extends StatelessWidget {
             ),
           ),
           textTheme: TextTheme(
+            headlineMedium: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withValues(alpha: 0.3),
+                  offset: Offset(2, 2),
+                  blurRadius: 4,
+                ),
+              ],
+            ),
             displayLarge: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 32,
@@ -131,6 +139,7 @@ class MyAppState extends ChangeNotifier {
   int elseTickCount = 0;
 
   MyAppState() {
+    easyIDE.initialize();
     _startPingMonitoring();
     checkControllers();
     sendControllerValues();
@@ -264,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const UploadPage();
         break;
       case 2:
-        page = const Placeholder();
+        page = const DiagnosticPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -288,11 +297,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           title: Text(
-            'Painel de Controle',
+            'EasyDS',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
-              fontWeight: FontWeight.w500,
               shadows: [
                 Shadow(
                   color: Colors.black.withValues(alpha: 0.3),
@@ -374,6 +382,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     TextTheme theme = Theme.of(context).textTheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       child: Center(
         child: Column(
@@ -383,47 +393,72 @@ class HomePage extends StatelessWidget {
               opacity: appState.araraConnectedViaWiFi ? 1.0 : 0,
               duration: const Duration(milliseconds: 500),
               child: appState.araraConnectedViaWiFi
-                  ? ElevatedButton(
-                      onPressed: () {
-                        appState.toggleEnabled();
-                      },
-                      style: ElevatedButton.styleFrom(
+                  ? SizedBox(
+                      width: 200, // Aumenta a largura do botão
+                      height: 60, // Aumenta a altura do botão
+                      child: ElevatedButton(
+                        onPressed: () {
+                          appState.toggleEnabled();
+                        },
+                        style: ElevatedButton.styleFrom(
                           backgroundColor: appState.isEnabled
                               ? Colors.red
-                              : Theme.of(context).colorScheme.onSecondary),
-                      child: Text(
-                        style: theme.labelLarge,
-                        appState.isEnabled ? 'Desabilitar' : 'Habilitar',
+                              : Theme.of(context).colorScheme.onSecondary,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20), // Expande internamente
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                16), // Cantos mais arredondados
+                          ),
+                        ),
+                        child: Text(
+                          appState.isEnabled ? 'DESABILITAR' : 'HABILITAR',
+                          style: theme.labelLarge?.copyWith(
+                            fontSize: 20, // Aumenta o tamanho da fonte
+                            fontWeight: FontWeight.w500, // Deixa mais destacado
+                          ),
+                        ),
                       ),
                     )
                   : const SizedBox.shrink(),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 70),
             Card(
-              child: SizedBox(
-                  width: 145,
-                  height: 50,
-                  child: Center(
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 10,
+              child: Container(
+                width: 250,
+                height: 80,
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit
+                            .scaleDown, // Evita que o texto estoure os limites
+                        child: Text(
+                          "Conexão",
+                          style: theme.bodyLarge?.copyWith(
+                              fontSize: 22), // Aumenta a fonte dinamicamente
                         ),
-                        Text("Conexão", style: theme.bodyLarge),
-                        const SizedBox(
-                          width: 18,
-                        ),
-                        Icon(
-                            appState.araraConnectedViaWiFi
-                                ? Icons.signal_cellular_4_bar_outlined
-                                : Icons
-                                    .signal_cellular_connected_no_internet_0_bar_outlined,
-                            color: appState.araraConnectedViaWiFi
-                                ? Theme.of(context).colorScheme.onSecondary
-                                : Theme.of(context).colorScheme.error)
-                      ],
+                      ),
                     ),
-                  )),
+
+                    // Ícone responsivo ao tamanho do Card
+                    FittedBox(
+                      child: Icon(
+                        appState.araraConnectedViaWiFi
+                            ? Icons.signal_cellular_4_bar_outlined
+                            : Icons
+                                .signal_cellular_connected_no_internet_0_bar_outlined,
+                        color: appState.araraConnectedViaWiFi
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context).colorScheme.error,
+                        size: 30, // Ajuste dinâmico do tamanho do ícone
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(
               height: 50,
@@ -434,6 +469,7 @@ class HomePage extends StatelessWidget {
               listOfConnectedControllers(appState)
             else
               Card(
+                color: Theme.of(context).colorScheme.tertiary,
                 child: SizedBox(
                   height: 50,
                   width: 250,
@@ -529,121 +565,6 @@ class HomePage extends StatelessWidget {
       icon: Icon(
         appState.araraConnectedViaWiFi ? Icons.wifi_off : Icons.wifi,
         color: Theme.of(context).colorScheme.secondary,
-      ),
-    );
-  }
-}
-
-class UploadPage extends StatefulWidget {
-  const UploadPage({Key? key}) : super(key: key);
-
-  @override
-  _UploadPageState createState() => _UploadPageState();
-}
-
-class _UploadPageState extends State<UploadPage> {
-  late Esp32Deployer deployer;
-  String? _selectedCode; // Código selecionado na lista
-  bool _isUploading = false; // Status do upload
-  String _statusMessage = ''; // Mensagem de status do upload
-
-  _UploadPageState() {
-    initializeDeployer();
-  }
-  // Lista de códigos prontos para seleção
-  final List<String> _availableCodes = [
-    'codigo1',
-    'codigo2',
-    'codigo3',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _statusMessage = 'Selecione um código e clique em "Enviar para ESP32"';
-  }
-
-  Future<void> initializeDeployer() async {
-    deployer = await Esp32Deployer.create();
-  }
-
-  Future<void> _uploadFile() async {
-    if (_selectedCode == null) {
-      setState(() {
-        _statusMessage = 'Erro: Nenhum código selecionado.';
-      });
-      return;
-    }
-
-    setState(() {
-      _isUploading = true;
-      _statusMessage = 'Iniciando o upload do código: $_selectedCode...';
-    });
-
-    try {
-      await deployer.deployCode(_selectedCode!);
-      setState(() {
-        _isUploading = false;
-        _statusMessage = 'Upload concluído com sucesso para $_selectedCode! 🚀';
-      });
-    } catch (e) {
-      setState(() {
-        _isUploading = false;
-        _statusMessage = 'Erro durante o upload: $e ❌';
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Upload de Código'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DropdownButton<String>(
-              value: _selectedCode,
-              hint: const Text('Selecione um código'),
-              items: _availableCodes.map((String code) {
-                return DropdownMenuItem<String>(
-                  value: code,
-                  child: Text(code),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedCode = value;
-                  _statusMessage = 'Código selecionado: $value';
-                });
-              },
-            ),
-            const SizedBox(height: 20),
-            // Botão para iniciar o upload
-            ElevatedButton(
-              onPressed: _isUploading ? null : _uploadFile,
-              child: _isUploading
-                  ? const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    )
-                  : const Text('Enviar para ESP32'),
-            ),
-            const SizedBox(height: 20),
-
-            // Mensagem de status
-            Text(
-              _statusMessage,
-              style: TextStyle(
-                color: _isUploading ? Colors.orange : Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
       ),
     );
   }

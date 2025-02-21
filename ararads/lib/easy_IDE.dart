@@ -5,7 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 class EasyIDE {
+  String _targetPath = "";
+
   EasyIDE() {}
+
+  Future<void> initialize() async {
+    await extractToTempDir();
+  }
 
   Future<void> execute() async {
     try {
@@ -21,30 +27,26 @@ class EasyIDE {
     }
   }
 
-  Future<void> installAndRun() async {
-    try {
-      Directory appDir = await getApplicationSupportDirectory();
-      String targetPath = '${appDir.path}/EasySTEAM_IDE/';
+  Future<void> extractToTempDir() async {
+    Directory appDir = await getApplicationSupportDirectory();
+    _targetPath = '${appDir.path}/EasySTEAM_IDE/';
 
-      Directory(targetPath).createSync(recursive: true);
+    Directory(_targetPath).createSync(recursive: true);
 
-      await copyAssetFile(
-          'assets/ide/EasySTEAM_IDE.exe', '$targetPath/EasySTEAM_IDE.exe');
+    await copyAssetFile(
+        'assets/ide/EasySTEAM_IDE.exe', '$_targetPath/EasySTEAM_IDE.exe');
 
-      await extractZip('assets/ide/_internal.zip', targetPath);
+    await extractZip('assets/ide/_internal.zip', _targetPath);
+  }
 
-      Process.run('powershell', [
-        '-NoProfile',
-        '-ExecutionPolicy',
-        'Bypass',
-        '-Command',
-        "Start-Process -FilePath '$targetPath/EasySTEAM_IDE.exe' -WorkingDirectory '$targetPath' -Verb runAs"
-      ]);
-
-      print('EasySTEAM IDE installed and launched successfully.');
-    } catch (e) {
-      print('Error installing and running IDE: $e');
-    }
+  void installAndRun() {
+    Process.run('powershell', [
+      '-NoProfile',
+      '-ExecutionPolicy',
+      'Bypass',
+      '-Command',
+      "Start-Process -FilePath '$_targetPath/EasySTEAM_IDE.exe' -WorkingDirectory '$_targetPath' -Verb runAs"
+    ]);
   }
 
   // Extracts a ZIP file from assets
